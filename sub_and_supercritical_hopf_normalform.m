@@ -22,4 +22,3 @@ grid on
 set_arrow(ax,t,xtraj,[0.1,0.3]); % this plots arrows at 10% and 30% of trajectory
 %% arrow is distorted -> redraw by calling function  wiotuh arguments
 set_arrow();
-%% this does not work well with axis equal
