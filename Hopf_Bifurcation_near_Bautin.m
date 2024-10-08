@@ -4,7 +4,7 @@ clear
 %form
 alpha = -1:0.01:1; % alpha values
  % parameter 
- beta=1;
+ beta=1;  %Two cases: (1)if beta=-1 and alpha>0, we get supercritical hopf bif. (2)if beta=1 and alpha<0, we get subcritical hopf bif.
  %sigma=-1
 %arrays 
 %  limit cycle values (stable and unstable)
