@@ -10,3 +10,8 @@ R0p=blkdiag(0,kron(diag(1:m),[0,-1;1,0])); %R'(0)
 F=R0p-C
 N1=null(F) %right nullspace
 N2=null(F')%left nullspace
+%% Find the assumption (A2) (Hopf bifuraction condition)
+DB=diff(Bdel);
+B2=Bp*DB;
+C1=int(B2,[0,2*pi])/(2*pi);
+CON2=N2'*C1*N1
