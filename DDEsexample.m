@@ -1,17 +1,19 @@
 %Hopf bifurcation for DDEs example (Third year report)
-syms t r
-tau=sym(pi/2); %value of tau
-m=3; % changing 
-B=-1*[1,reshape([cos((1:m)*t);sin((1:m)*t)],1,[])]; %B(t)
+syms t r a
+tau=sym(pi/2);
+m=2; % change as you want
+B=[1,reshape([cos((1:m)*t);sin((1:m)*t)],1,[])]; %B(t);
 Bp=diag([1,2*ones(1,2*m)])*B.';  %B^+(t)
-Bdel=subs(B,t,t-tau);   %B(t-tau)
-C=int(Bp*Bdel,[0,2*pi])/(2*pi);
+Bdel=subs(B,t,t-tau); %B(t-tau)
+gx=subs(-B,t,t-a);
+gx0=subs(gx,a,tau);
+A=Bp*(gx0);
+C0=int(A,[0,2*pi])/(2*pi);
 R0p=blkdiag(0,kron(diag(1:m),[0,-1;1,0])); %R'(0)
-F=R0p-C
-N1=null(F) %right nullspace
-N2=null(F')%left nullspace
-%% Find the assumption (A2) (Hopf bifuraction condition)
-DB=diff(Bdel);
-B2=Bp*DB;
-C1=int(B2,[0,2*pi])/(2*pi);
-CON2=N2'*C1*N1
+F0=R0p+C0;
+V=null(F0); %right nullspace
+W=null(F0'); %left nullspace
+dgxa=diff(gx,a);
+dgxa0=subs(dgxa,a,tau);
+dgxa1=int(Bp*dgxa0,[0,2*pi])/(2*pi);
+W'*dgxa1*V(:,1)
